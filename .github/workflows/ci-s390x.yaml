@@ -11,6 +11,9 @@ on:
 permissions:
   contents: read
 
+env:
+  JAVA_TOOL_OPTIONS: "-Xss32m -Xmx8g"
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/s390x' }}
