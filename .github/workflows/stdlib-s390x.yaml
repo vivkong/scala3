@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 env:
-  JAVA_TOOL_OPTIONS: "-Xss32m"
+  JAVA_TOOL_OPTIONS: "-Xss16m"
 
 jobs:
 

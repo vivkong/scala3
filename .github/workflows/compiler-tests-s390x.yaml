@@ -7,7 +7,7 @@ permissions:
   contents: read
 
 env:
-  JAVA_TOOL_OPTIONS: "-Xss32m"
+  JAVA_TOOL_OPTIONS: "-Xss16m"
 
 jobs:
 
@@ -52,9 +52,13 @@ jobs:
       - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
 
       - name: Test `scala3-compiler-bootstrapped`
+        env:
+          SBT_OPTS: "-Xss16m -Xms1024m -Xmx10g -XX:MaxInlineLevel=35 -XX:ReservedCodeCacheSize=512m"
         run: ./project/scripts/sbt scala3-compiler-bootstrapped/test
 
       - name: Cmd Tests
+        env:
+          SBT_OPTS: "-Xss16m -Xms1024m -Xmx10g -XX:MaxInlineLevel=35 -XX:ReservedCodeCacheSize=512m"
         run: |
           ./project/scripts/sbt scala3-bootstrapped/publishLocal
           ./project/scripts/bootstrappedOnlyCmdTests
