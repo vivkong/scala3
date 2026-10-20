@@ -28,10 +28,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -53,10 +53,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -78,10 +78,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -97,10 +97,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -117,10 +117,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -136,10 +136,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -156,10 +156,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -175,10 +175,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -196,11 +196,11 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         id: jdk
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
@@ -219,10 +219,10 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17 (IBM Semeru — s390x)
+      - name: Set up JDK 17 (Temurin — s390x)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
-          distribution: 'semeru'
+          distribution: 'temurin'
           java-version: 17
           cache: 'sbt'
 
