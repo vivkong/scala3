@@ -52,13 +52,9 @@ jobs:
       - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
 
       - name: Test `scala3-compiler-bootstrapped`
-        env:
-          SBT_OPTS: "-Xss16m -Xms1024m -Xmx10g -XX:MaxInlineLevel=35 -XX:ReservedCodeCacheSize=512m"
         run: ./project/scripts/sbt scala3-compiler-bootstrapped/test
 
       - name: Cmd Tests
-        env:
-          SBT_OPTS: "-Xss16m -Xms1024m -Xmx10g -XX:MaxInlineLevel=35 -XX:ReservedCodeCacheSize=512m"
         run: |
           ./project/scripts/sbt scala3-bootstrapped/publishLocal
           ./project/scripts/bootstrappedOnlyCmdTests
@@ -177,16 +173,25 @@ jobs:
       - name: Test `scala3-directives-parser-bootstrapped`
         run: ./project/scripts/sbt scala3-directives-parser-bootstrapped/test
 
-  # JDK 17 only; 25/26 skipped until EA builds are confirmed for s390x.
   test-repl:
     if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
     runs-on: [self-hosted, linux, s390x]
+    strategy:
+      fail-fast: false
+      matrix:
+        jdk: [17, 25, 26]
     steps:
       - name: Git Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up JDK 17
+      - name: Set up JDK ${{ matrix.jdk }} (REPL subprocess)
         id: jdk
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.jdk }}
+
+      - name: Set up JDK 17 (build, default)
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           distribution: 'temurin'
@@ -195,7 +200,7 @@ jobs:
 
       - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
 
-      - name: Test REPL on JDK 17
+      - name: Test REPL on JDK ${{ matrix.jdk }}
         env:
           DOTTY_REPL_TEST_JAVA_HOME: ${{ steps.jdk.outputs.path }}
         run: ./project/scripts/sbt scala3-repl/test
