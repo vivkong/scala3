@@ -1,0 +1,216 @@
+name: Compiler Tests (s390x)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  JAVA_TOOL_OPTIONS: "-Xss32m"
+
+jobs:
+
+  test-scala3-compiler-nonbootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-compiler-nonbootstrapped`
+        run: ./project/scripts/sbt scala3-compiler-nonbootstrapped/test
+
+      - name: Cmd Tests
+        run: |
+          ./project/scripts/sbt scala3-nonbootstrapped/publishLocal
+          ./project/scripts/cmdTests
+
+  test-scala3-compiler-bootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-compiler-bootstrapped`
+        run: ./project/scripts/sbt scala3-compiler-bootstrapped/test
+
+      - name: Cmd Tests
+        run: |
+          ./project/scripts/sbt scala3-bootstrapped/publishLocal
+          ./project/scripts/bootstrappedOnlyCmdTests
+
+  test-scala3-sbt-bridge-nonbootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-sbt-bridge-nonbootstrapped`
+        run: ./project/scripts/sbt scala3-sbt-bridge-nonbootstrapped/test
+
+  test-scala3-sbt-bridge-bootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-sbt-bridge-bootstrapped`
+        run: ./project/scripts/sbt scala3-sbt-bridge-bootstrapped/test
+
+  test-tasty-core-nonbootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `tasty-core-nonbootstrapped`
+        run: ./project/scripts/sbt tasty-core-nonbootstrapped/test
+
+  test-tasty-core-bootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `tasty-core-bootstrapped`
+        run: ./project/scripts/sbt tasty-core-bootstrapped/test
+
+  test-scala3-directives-parser-nonbootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-directives-parser-nonbootstrapped`
+        run: ./project/scripts/sbt scala3-directives-parser-nonbootstrapped/test
+
+  test-scala3-directives-parser-bootstrapped:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test `scala3-directives-parser-bootstrapped`
+        run: ./project/scripts/sbt scala3-directives-parser-bootstrapped/test
+
+  # JDK 17 only; 25/26 skipped until EA builds are confirmed for s390x.
+  test-repl:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        id: jdk
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test REPL on JDK 17
+        env:
+          DOTTY_REPL_TEST_JAVA_HOME: ${{ steps.jdk.outputs.path }}
+        run: ./project/scripts/sbt scala3-repl/test
+
+  test-presentation-compiler:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Test Presentation Compiler
+        run: ./project/scripts/sbt scala3-presentation-compiler/test

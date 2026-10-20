@@ -1,0 +1,33 @@
+name: Miscellaneous Tests (s390x)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  JAVA_TOOL_OPTIONS: "-Xss32m"
+
+jobs:
+
+  # JDK 17 only; the JDK 25 scripted variant (sbt-bridge/main-discovery*) is
+  # skipped until EA builds are confirmed available for s390x.
+  scripted-tests:
+    if: github.event_name != 'pull_request' || !contains(github.event.pull_request.body, '[skip ci]')
+    runs-on: [self-hosted, linux, s390x]
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17 (Temurin — s390x)
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'sbt'
+
+      - uses: sbt/setup-sbt@ecad189dd245444b9ae0a0cd5922fd938b88906f # v1.5.12
+
+      - name: Run SBT scripted tests
+        run: ./project/scripts/sbt scala3-bootstrapped/scripted
